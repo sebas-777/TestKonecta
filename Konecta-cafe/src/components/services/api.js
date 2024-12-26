@@ -74,3 +74,5 @@ export const api ={
         return response.json();
     }
 }
+
+export default api;

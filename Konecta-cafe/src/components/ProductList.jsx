@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { api } from "./services/api";
 import { Alert, Button, Form, Modal, Spinner, Table } from "react-bootstrap";
+import Header from "./Header";
 
 const ProductList = () => {
     const[products, setProducts] = useState([]);
@@ -9,6 +10,7 @@ const ProductList = () => {
     const [error, setError] = useState(null);
     const [showEditModal, setShowEditModal] = useState(false);
     const [currentProduct, setCurrentProduct] = useState(null);
+    
 
     useEffect(() => { 
 
@@ -77,7 +79,10 @@ const ProductList = () => {
     
     return ( 
        <>
-       
+       <div className="containermt-4">
+        <Header setProducts={setProducts} />
+        {loading && <Spinner animation="border" variant="primary" />}
+        {error && <Alert variant="danger">{error}</Alert>}
         <Table striped bordered hover>
             <thead>
                 <tr>
@@ -193,6 +198,9 @@ const ProductList = () => {
                     
                 </Modal>
             )}
+
+       </div>
+        
         </>
      );
 }
