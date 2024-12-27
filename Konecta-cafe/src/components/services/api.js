@@ -42,7 +42,7 @@ export const api ={
             const responseText = await response.text();
             console.log("Respuesta del servidor:", responseText);
             
-            // Intenta parsear como JSON solo si es posible
+          
             try {
                 return JSON.parse(responseText);
             } catch {
@@ -59,7 +59,7 @@ export const api ={
             method: 'DELETE'
         });
         if(!response.ok)throw new Error('Failed to delete product');
-        //return response.json();
+        
     },
 
     async createSale(sale){

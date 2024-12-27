@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { api } from './services/api'; // Asegúrate de importar tu API
+import { api } from './services/api'; 
 
 const SaleModal = ({ showModal, setShowModal, setProducts }) => {
     const [selectedProductId, setSelectedProductId] = useState('');
@@ -10,7 +10,7 @@ const SaleModal = ({ showModal, setShowModal, setProducts }) => {
         const fetchAvailableProducts = async () => {
             try {
                 const data = await api.fetchProducts();
-                // Filtrar productos disponibles (con stock)
+                
                 const filteredProducts = data.filter(product => product.stock > 0);
                 setAvailableProducts(filteredProducts);
             } catch (error) {
@@ -23,19 +23,19 @@ const SaleModal = ({ showModal, setShowModal, setProducts }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Obtener el producto seleccionado
+           
             const product = availableProducts.find(p => p.id === selectedProductId);
             if (!product) return;
 
             const newStock = product.stock - quantity;
 
-            // Realizar la venta a través del API
+            
             await api.createSale({ producto_id: product.id, cantidad: quantity });
 
-            // Actualizar el stock del producto
+          
             await api.updateProduct(product.id, { ...product, stock: newStock });
 
-            // Cerrar el modal
+            
             setShowModal(false);
         } catch (error) {
             console.error("Error al realizar la venta:", error);
@@ -49,7 +49,7 @@ const SaleModal = ({ showModal, setShowModal, setProducts }) => {
             setQuantity(value);
         }
     }
-    // Determina el stock disponible del producto seleccionado
+    
     const selectedProduct = availableProducts.find(p => p.id === selectedProductId);
     const maxQuantity = selectedProduct ? selectedProduct.stock : 0;
 
