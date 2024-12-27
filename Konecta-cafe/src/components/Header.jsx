@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import ProductModal from './ProductModal';
+import SaleModal from './SaleModal';
 
 const Header = ({ setProducts }) => { 
     const [showModal, setShowModal] = useState(false);
+    const [showSaleModal, setShowSaleModal] = useState(false);
 
     return (  
       <>
@@ -23,14 +25,13 @@ const Header = ({ setProducts }) => {
                           Agregar Nuevo Producto
                       </button>
                       <button 
-                          id="new-product-btn" 
+                          id="new-sale-btn" 
                           className="btn btn-success d-flex align-items-center" 
-                          onClick={() => setShowModal(true)} 
+                          onClick={() => setShowSaleModal(true)}   
                       >
                           <i className="bi bi-plus-lg me-2"></i>
                           Vender Producto 
                       </button>
-                      {/* Otros botones */}
                   </div>
               </div>
           </nav>
@@ -41,6 +42,14 @@ const Header = ({ setProducts }) => {
                   setShowModal={setShowModal} 
                   setProducts={setProducts}
               />
+          )}
+
+          {showSaleModal && (
+            <SaleModal
+              showModal={showSaleModal}
+              setShowModal={setShowSaleModal}
+              setProducts={setProducts} 
+            />
           )}
       </>
   );
